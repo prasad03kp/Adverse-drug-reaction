@@ -1,0 +1,96 @@
+{% load static  %}
+{% static "images" as baseUrl %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.0/css/mdb.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("{% static  'images/med.jpg' %}");
+            background-size: 120% auto;
+            margin-top: 1%;
+        }
+
+        .card {
+            transform: translate(-50%);
+            margin-left: 50%;
+            margin-top: 15%;
+            width: 1000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card hoverable p-4">
+            <div style="display:inline;margin-left:5%;">
+                <form action="" method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2 class="badge badge-primary" style="font-size: 28px;">Select the number of medicines :
+                            </h2>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="browser-default custom-select count" name="count" id="count">
+                                <option value="" disabled selected>Medicine-1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="container" id="divisions" style="margin-top: 5%;">
+                    </div>
+                    <h2 style="margin-left:22%;">
+                        <input class="btn btn-success" type="submit" value="submit" name="submit" />
+                        <input class="btn btn-warning" type="reset" value="reset" name="reset" id="reset" />
+                    </h2>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.0/js/mdb.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('select.count').change(function () {
+                let count = $(this).children("option:selected").val();
+
+                let divisions = "";
+
+                let allMedicines = Array("Amylinomimetics", "Biguanides", "Hexalen", "Acetaminophen", "Triazolam", "Matulane", "Estrostep Fe", "Seasonale", "Thermazene", "Aprotinin", "Ramelteon", "Malarone", "Chlorpheniramine", "Motrin IB", "Niaspan", "Reaction");
+
+                for (var i = 1; i <= count; i++) {
+                    divisions += "<div class='row'><div class='col-md-4'><select class='browser-default custom-select' name=key" + i + "> <option value='' disabled selected>Select Medicine</option><option value='0'>Amylinomimetics</option><option value='1'>Biguanides</option><option value='2'>Hexalen</option><option value='3'>Acetaminophen</option><option value='4'>Triazolam</option><option value='5'>Matulane</option><option value='6'>Estrostep Fe</option><option value='7'>Seasonale</option><option value='8'>Thermazene</option><option value='9'>Aprotinin</option><option value='10'>Ramelteon</option><option value='11'>Malarone</option><option value='12'>Chlorpheniramine</option><option value='13 IB'>Motrin IB</option><option value='14'>Niaspan</option><option value='15'>Reaction</option></select></div> <div class='col-md-4'><select  class='browser-default custom-select' name=value" + i + "> <option value='' disabled selected>Select Dosage</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></div> </div></br>";
+                }
+
+                $('#divisions').html(divisions);
+            });
+
+            $('#reset').on('click', function () {
+                $('#divisions').html("");
+            });
+        });
+    </script>
+</body>
+
+</html>
